@@ -1,10 +1,11 @@
-<div
+<p-message
+  severity="error"
   *ngIf="errorService.error$ | async as error"
-  class="h-[50px] flex justify-center items-center bg-red-600 text-white relative">
-  {{ error }}
+>{{ error }}
 
   <button
-    class="absolute top-3 right-5 text-white"
+    class="absolute top-2 right-3 text-red-600"
     (click)="errorService.clear()"
-  >&times;</button>
-</div>
+  >&times;
+  </button>
+</p-message>

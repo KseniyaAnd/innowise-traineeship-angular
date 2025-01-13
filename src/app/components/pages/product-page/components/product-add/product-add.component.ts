@@ -1,21 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
-import {FocusDirective} from '../../directives/focus.directive';
-import {ProductService} from '../../../services/product.service';
-import {ModalService} from '../../../services/modal.service';
-
+import {ProductService} from '../../../../../services/product.service';
+import {FocusDirective} from '../../../../directives/focus.directive';
 @Component({
-  selector: 'app-create-component',
+  selector: 'app-product-add',
   imports: [
     ReactiveFormsModule,
     NgIf,
+    FocusDirective,
     FocusDirective
   ],
-  templateUrl: './create-component.component.html',
   standalone: true,
+  templateUrl: './product-add.component.html',
+  styleUrl: './product-add.component.css'
 })
-export class CreateComponentComponent implements OnInit {
+export class ProductAddComponent {
   form = new FormGroup({
     title: new FormControl<string>('', [
       Validators.minLength(6),
@@ -29,11 +29,7 @@ export class CreateComponentComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private modalService: ModalService
   ) {
-  }
-
-  ngOnInit() {
   }
 
   submit() {
@@ -48,7 +44,6 @@ export class CreateComponentComponent implements OnInit {
         count: 1
       }
     }).subscribe(() => {
-      this.modalService.close()
     })
   }
 }

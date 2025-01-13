@@ -5,7 +5,6 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
   selector: 'app-navigation',
   imports: [
     RouterLink,
-    RouterLinkActive
   ],
   templateUrl: './navigation.component.html',
   standalone: true

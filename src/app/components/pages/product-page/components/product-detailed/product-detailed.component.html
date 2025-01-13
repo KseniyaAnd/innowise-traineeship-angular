@@ -1,0 +1,14 @@
+<div class="flex gap-4 mb-4">
+  <img class="w-80 h-80" src="{{product.image}}">
+  <div class="flex flex-col gap-4">
+    <div>Title: {{ product.title }}</div>
+    <div>Price: {{ product.price | currency: 'BYN ' }}</div>
+    <div>Description: {{ product.description }}</div>
+    <div>Category: {{ product.category }}</div>
+  </div>
+</div>
+<div class="flex justify-end gap-2">
+  <p-button label="Cancel" severity="secondary" (click)="close()"/>
+</div>
+
+

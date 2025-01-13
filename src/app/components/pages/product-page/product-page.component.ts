@@ -1,53 +1,55 @@
 import {Component, OnInit} from '@angular/core';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {CreateComponentComponent} from '../../create-component/create-component/create-component.component';
-import {FilterProductsPipe} from '../../../pipes/filter-products.pipe';
-import {ModalComponent} from '../../modal/modal/modal.component';
-import {ProductComponent} from '../../product/product.component';
+import {NgIf} from '@angular/common';
+import {ProductsListComponent} from './components/products-list/products-list.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ProductService} from '../../../services/product.service';
-import {ModalService} from '../../../services/modal.service';
+import {InputTextModule} from 'primeng/inputtext';
+import {IProduct} from '../../../models/products';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {ProductAddComponent} from './components/product-add/product-add.component';
 
 @Component({
-  selector: 'app-product-page',
+  selector: 'app-products-list-page',
   standalone: true,
   imports: [
-    AsyncPipe,
-    CreateComponentComponent,
-    FilterProductsPipe,
-    ModalComponent,
-    NgForOf,
     NgIf,
-    ProductComponent,
+    ProductsListComponent,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    InputTextModule,
   ],
+  providers: [DialogService],
   templateUrl: './product-page.component.html',
 })
 export class ProductPageComponent implements OnInit{
   title = 'angular-trainee';
-  //products: IProduct[] = [];
+  products: IProduct[] = [];
   loading = false
-  // products$: Observable<IProduct[]>
   term = ''
-
-  // TODO Механизм обнаружения изменений в Angular,  changeDetection: ChangeDetectionStrategy.OnPush, ChangeDetectorRef и методы ChangeDetectorRef
+  ref: DynamicDialogRef;
 
   constructor(
     public productsService: ProductService,
-    public modalService: ModalService
+    private dialogService: DialogService,
   ) {
   }
 
-  // TODO прочитать про хуки жизненного цикла
+  show() {
+    this.ref = this.dialogService.open(ProductAddComponent, {
+      data: {},
+      header: 'Product Details',
+      width: '50%',
+      dismissableMask: true,
+      modal: true
+    });
+  }
+
   ngOnInit(): void {
     this.loading = true
-    // this.products$ =  this.productsService.getAll().pipe(
-    //   tap(() => this.loading = false)
-    // )
-    this.productsService.getAll().subscribe(products => {
+    this.productsService.getAll().subscribe((products) => {
       console.log(products)
       this.loading = false
+      this.products = products;
       // this.cdr.markForCheck();
     })
   }
