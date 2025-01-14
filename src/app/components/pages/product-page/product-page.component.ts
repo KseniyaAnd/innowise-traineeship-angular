@@ -7,6 +7,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {IProduct} from '../../../models/products';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {ProductAddComponent} from './components/product-add/product-add.component';
+import {ProgressSpinner} from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-products-list-page',
@@ -17,6 +18,7 @@ import {ProductAddComponent} from './components/product-add/product-add.componen
     ReactiveFormsModule,
     FormsModule,
     InputTextModule,
+    ProgressSpinner,
   ],
   providers: [DialogService],
   templateUrl: './product-page.component.html',

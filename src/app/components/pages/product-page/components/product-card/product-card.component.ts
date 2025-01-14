@@ -17,8 +17,7 @@ import {ProductDetailedComponent} from '../product-detailed/product-detailed.com
 })
 export class ProductCardComponent {
   @Input() product: IProduct;
-
-  details = false
+  @Input() productsArr: IProduct[];
 
   ref: DynamicDialogRef;
 
@@ -27,14 +26,20 @@ export class ProductCardComponent {
   ) {
   }
 
-
   show() {
     this.ref = this.dialogService.open(ProductDetailedComponent, {
       data: {product: this.product},
       header: 'Product Details',
-      width: '50%',
+      width: '60%',
       dismissableMask: true,
       modal: true
     });
+  }
+
+  delete() {
+    const index = this.productsArr.findIndex(n => n === this.product);
+    if (index !== -1) {
+      this.productsArr.splice(index, 1);
+    }
   }
 }

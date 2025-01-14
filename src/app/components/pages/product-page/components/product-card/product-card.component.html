@@ -20,14 +20,22 @@
     <div class="flex flex-col md:items-center">
       <span
         class="text-xl font-semibold text-surface-900 dark:text-surface-0">{{ product.price | currency: 'BYN ' }}</span>
-      <div class="flex flex-row-reverse md:flex-row gap-2">
+      <div class="flex flex-col items-center">
         <p-button
           variant="text"
           class="text-nowrap"
-          [severity]="details? 'info' : 'success'"
+          severity="success"
           (click)="show()"
         >
-          {{ details ? 'Hide' : 'Show' }} Details
+          Show Details
+        </p-button>
+        <p-button
+          variant="text"
+          class="text-nowrap"
+          severity="danger"
+          (click)="delete()"
+        >
+          Delete Product
         </p-button>
       </div>
     </div>
