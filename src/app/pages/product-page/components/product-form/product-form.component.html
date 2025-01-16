@@ -1,0 +1,52 @@
+<form [formGroup]="productForm" novalidate class="flex gap-4 mb-4">
+  @if (product) {
+    <img class="w-80 h-full" src="{{product.image}}">
+  }
+  <div class="flex flex-col gap-4 flex-1">
+    <app-form-control label="Title">
+      <input type="text" [formControl]="productForm.controls.title" pInputText>
+      <div *ngIf="productForm.controls.title.invalid && productForm.controls.title.touched"
+           class="text-red-600 mb-4">
+        Title is required.
+      </div>
+    </app-form-control>
+    <app-form-control label="Price">
+      <input type="number" [formControl]="productForm.controls.price" pInputText appNumberFormat appLimitNumberFormat
+             [maxSize]='500'>
+      <div *ngIf="productForm.controls.title.invalid && productForm.controls.title.touched"
+           class="text-red-600 mb-4">
+        Title is required.
+      </div>
+    </app-form-control>
+    <app-form-control label="Description">
+      <textarea type="text" [formControl]="productForm.controls.description" pTextarea class="h-40"></textarea>
+    </app-form-control>
+    <app-form-control label="Category">
+      <p-select
+        [options]="categories"
+        [formControl]="productForm.controls.category"
+        class="w-full md:w-56"
+      ></p-select>
+    </app-form-control>
+    <app-form-control label="Rate">
+      <input type="number" max="5.0" [formControl]="productForm.controls.rating.controls.rate" pInputText
+             appNumberFormat appLimitNumberFormat
+             [maxSize]='5'>
+    </app-form-control>
+    <app-form-control label="Count">
+      <input type="number" [formControl]="productForm.controls.rating.controls.count" pInputText>
+    </app-form-control>
+  </div>
+</form>
+
+@if (product) {
+  @if (updating) {
+    <p-button (onClick)="update()" severity="secondary" label="Update" class="mr-2"/>
+  } @else {
+    <p-button (onClick)="updatingToggle()" severity="secondary" label="Update" class="mr-2"/>
+  }
+  <p-button (onClick)="close()" severity="secondary" label="Cancel"/>
+} @else {
+  <p-button (onClick)="save()" severity="secondary" label="Save"/>
+}
+

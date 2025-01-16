@@ -7,13 +7,13 @@
 >
 
 <div class="w-full flex justify-center">
-  <p-progress-spinner *ngIf="loading" strokeWidth="8" animationDuration=".8s"
+  <p-progress-spinner *ngIf="loading | async" strokeWidth="8" animationDuration=".8s"
                       [style]="{ width: '50px', height: '50px' }" class="text-center"/>
 </div>
 
-<div *ngIf="productsService.products.length">
+<div *ngIf="products | async as list">
   <app-products-list [filterTerm]="term"
-                     [productsArr]="products"
+                     [productsArr]="list"
   ></app-products-list>
 </div>
 

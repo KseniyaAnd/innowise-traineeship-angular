@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
 import {CurrencyPipe} from '@angular/common';
 import {Button} from 'primeng/button';
-import {IProduct} from '../../../../../models/products';
+import {IProduct} from '../../../../models/products';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import {ProductDetailedComponent} from '../product-detailed/product-detailed.component';
+import {ProductFormComponent} from '../product-form/product-form.component';
 
 @Component({
   selector: 'app-product-card',
@@ -27,7 +27,7 @@ export class ProductCardComponent {
   }
 
   show() {
-    this.ref = this.dialogService.open(ProductDetailedComponent, {
+    this.ref = this.dialogService.open(ProductFormComponent, {
       data: {product: this.product},
       header: 'Product Details',
       width: '60%',

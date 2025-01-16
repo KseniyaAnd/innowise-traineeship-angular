@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {NgIf} from '@angular/common';
-import {ProductsListComponent} from './components/products-list/products-list.component';
+import {Component, inject, OnInit} from '@angular/core';
+import {AsyncPipe, NgIf} from '@angular/common';
+import {ProductsListComponent} from './containers/products-list/products-list.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ProductService} from '../../../services/product.service';
+import {ProductService} from '../../services/product.service';
 import {InputTextModule} from 'primeng/inputtext';
-import {IProduct} from '../../../models/products';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
-import {ProductAddComponent} from './components/product-add/product-add.component';
 import {ProgressSpinner} from 'primeng/progressspinner';
+import {ProductFormComponent} from './components/product-form/product-form.component';
 
 @Component({
   selector: 'app-products-list-page',
@@ -19,25 +18,28 @@ import {ProgressSpinner} from 'primeng/progressspinner';
     FormsModule,
     InputTextModule,
     ProgressSpinner,
+    AsyncPipe,
   ],
   providers: [DialogService],
   templateUrl: './product-page.component.html',
 })
-export class ProductPageComponent implements OnInit{
+export class ProductPageComponent implements OnInit {
+  private productsService = inject(ProductService);
+
+  products = this.productsService.products;
+  loading = this.productsService.loading;
+
   title = 'angular-trainee';
-  products: IProduct[] = [];
-  loading = false
   term = ''
   ref: DynamicDialogRef;
 
   constructor(
-    public productsService: ProductService,
     private dialogService: DialogService,
   ) {
   }
 
   show() {
-    this.ref = this.dialogService.open(ProductAddComponent, {
+    this.ref = this.dialogService.open(ProductFormComponent, {
       data: {},
       header: 'Product Details',
       width: '50%',
@@ -47,13 +49,7 @@ export class ProductPageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loading = true
-    this.productsService.getAll().subscribe((products) => {
-      console.log(products)
-      this.loading = false
-      this.products = products;
-      // this.cdr.markForCheck();
-    })
+    this.productsService.getAll();
   }
 
 }

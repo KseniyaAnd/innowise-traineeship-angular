@@ -1,5 +1,5 @@
 export interface IProduct {
-  id?: number
+  id: number
   title: string
   price: number
   description: string
@@ -10,3 +10,9 @@ export interface IProduct {
     count: number
   }
 }
+
+export type IProductUpdate = Omit<IProduct, 'image'>
+
+export type IProductCreate = Omit<IProduct, 'id'>
+
+export const Categories = ['men\'s clothing', 'jewelery', 'electronics','women\'s clothing'] as const;
