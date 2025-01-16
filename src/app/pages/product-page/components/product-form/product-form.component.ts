@@ -55,12 +55,12 @@ export class ProductFormComponent implements OnInit {
   ) {
   }
 
-  createNewBodyforCreate() {
+  createNewBodyForCreate() {
      const updateBody: IProductCreate = {
       title: this.productForm.controls.title.value,
       price: this.productForm.controls.price.value,
       description: this.productForm.controls.description.value,
-      image: this.productForm.controls.image.value,
+      image: "https://i.pravatar.cc",
       category: this.productForm.controls.category.value,
       rating: {
         rate: this.productForm.get('rating.rate')?.value as number,
@@ -71,7 +71,7 @@ export class ProductFormComponent implements OnInit {
     return updateBody;
   }
 
-  createNewBodyforUpdate() {
+  createNewBodyForUpdate() {
     const updateBody: IProductUpdate = {
       id: this.productForm.controls.id.value,
       title: this.productForm.controls.title.value,
@@ -104,7 +104,7 @@ export class ProductFormComponent implements OnInit {
   update() {
     this.loading = true;
 
-    const updatedBody: IProductUpdate = this.createNewBodyforUpdate();
+    const updatedBody: IProductUpdate = this.createNewBodyForUpdate();
 
     this.productService.update(updatedBody).pipe(
       takeUntilDestroyed(this.destroyRef)
@@ -123,7 +123,7 @@ export class ProductFormComponent implements OnInit {
   save() {
     this.loading = true;
 
-    const updatedBody: IProductCreate = this.createNewBodyforCreate();
+    const updatedBody: IProductCreate = this.createNewBodyForCreate();
 
     this.productService.create(updatedBody).pipe(
       takeUntilDestroyed(this.destroyRef)
