@@ -4,20 +4,25 @@ import {Button} from 'primeng/button';
 import {IProduct} from '../../../../models/products';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {ProductFormComponent} from '../product-form/product-form.component';
+import {HighlightDirective} from '../../../../components/directives/highlight.directive';
 
 @Component({
   selector: 'app-product-card',
   imports: [
     Button,
     CurrencyPipe,
+    HighlightDirective
   ],
-  providers: [DialogService],
+  providers: [
+    DialogService
+  ],
   templateUrl: './product-card.component.html',
   standalone: true,
 })
 export class ProductCardComponent {
   @Input() product: IProduct;
   @Input() productsArr: IProduct[];
+  @Input() filterTerm: string;
 
   ref: DynamicDialogRef;
 
