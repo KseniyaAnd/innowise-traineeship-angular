@@ -3,14 +3,14 @@
     <img class="w-80 h-full" src="{{product.image}}">
   }
   <div class="flex flex-col gap-4 flex-1">
-    <app-form-control label="Title">
+    <app-form-control label="Title" required=true>
       <input type="text" [formControl]="productForm.controls.title" pInputText>
       <div *ngIf="productForm.controls.title.invalid && productForm.controls.title.touched"
            class="text-red-600 mb-4">
         Title is required.
       </div>
     </app-form-control>
-    <app-form-control label="Price">
+    <app-form-control label="Price" required=true>
       <input type="number" [formControl]="productForm.controls.price" pInputText appNumberFormat appLimitNumberFormat
              [maxSize]='500'>
       <div *ngIf="productForm.controls.title.invalid && productForm.controls.title.touched"
