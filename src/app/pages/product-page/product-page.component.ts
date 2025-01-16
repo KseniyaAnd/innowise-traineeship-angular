@@ -41,7 +41,7 @@ export class ProductPageComponent implements OnInit {
   show() {
     this.ref = this.dialogService.open(ProductFormComponent, {
       data: {},
-      header: 'Product Details',
+      header: 'Product Create',
       width: '50%',
       dismissableMask: true,
       modal: true
