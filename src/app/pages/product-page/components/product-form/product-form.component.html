@@ -29,9 +29,7 @@
       ></p-select>
     </app-form-control>
     <app-form-control label="Rate">
-      <input type="number" max="5.0" [formControl]="productForm.controls.rating.controls.rate" pInputText
-             appNumberFormat appLimitNumberFormat
-             [maxSize]='5'>
+      <app-rating-stars [formControl]="productForm.controls.rating.controls.rate"></app-rating-stars>
     </app-form-control>
     <app-form-control label="Count">
       <input type="number" [formControl]="productForm.controls.rating.controls.count" pInputText>

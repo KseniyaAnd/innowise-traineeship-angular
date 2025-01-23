@@ -1,0 +1,9 @@
+<div id="container">
+    @for (i of [].constructor(5); track idx; let idx = $index) {
+        <fa-icon
+                [class.rated]="rating >= (idx+1)"
+                [icon]="faStar"
+                (click)="setRating(idx+1)"
+        ></fa-icon>
+    }
+</div>
